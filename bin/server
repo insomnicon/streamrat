@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var opts = require('commander').
+  option('--port [port]', 'Port to listen on', 1080);
+
+var options = opts.parse(process.argv);
+
+var server = require('../lib/server');
+
+var app = server.app();
+
+app.listen(options.port);

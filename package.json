@@ -1,0 +1,20 @@
+{
+  "name": "band",
+  "version": "0.0.1",
+  "description": "Stream Bandwith Monitor",
+  "main": "index.js",
+  "dependencies": {
+    "express": "~3.4.6",
+    "commander": "~2.1.0",
+    "connect": "~2.11.2",
+    "underscore": "~1.5.2",
+    "chai": "~1.8.1",
+    "mocha": "~1.15.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "BSD-2-Clause"
+}

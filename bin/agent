@@ -1,0 +1,34 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var url = require('url');
+
+var opts = require('commander').
+  option('--url [url]', 'Stream URL to advertise', url).
+  option('--stream [streamName]', 'Name of stream').
+  option('--limit [mbits]', 'Advertise a limit (in Mbit/s)', 100).
+  option('--report [reportUrl]', 'URL to POST reports to', url.parse).
+  option('--debug', 'Enable debugging');
+
+var options = opts.parse(process.argv);
+
+if (!options.report || !options.url || !options.stream) {
+  opts.outputHelp();
+  process.exit(-1);
+}
+
+var agent = require('../lib/agent');
+
+function poll()
+{
+  agent.getStats(function(metrics) {
+    agent.sendReport(metrics, options, function(response) {
+      console.log(metrics);
+    });
+  });
+}
+
+poll();
+
+setInterval(poll, 5000);
